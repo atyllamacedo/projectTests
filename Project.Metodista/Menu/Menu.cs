@@ -1,4 +1,5 @@
-﻿using Project.Metodista.Application.Service;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Project.Metodista.Application.Service;
 using Project.Metodista.Domain.DTOs;
 using Project.Metodista.Domain.Enum;
 using Project.Metodista.Domain.Repository;
@@ -16,12 +17,14 @@ namespace Project.Metodista.Menu
 
     public class Menu
     {
-        private static readonly string regexValidaSeENumero = @"^[0-9]+$";
+        private readonly string regexValidaSeENumero = @"^[0-9]+$";
         private readonly IOperacoesService _operacoesService;
-        public Menu()
+
+        public Menu(IOperacoesService operacoesService)
         {
-            _operacoesService = new OperacoesService();
+            _operacoesService = operacoesService;
         }
+
         public void MenuProject()
         {
             bool showMenu = true;
@@ -31,6 +34,7 @@ namespace Project.Metodista.Menu
             }
         }
 
+        #region Metodos Privados
         public void Initial()
         {
             bool showCadastro = true;
@@ -225,6 +229,7 @@ namespace Project.Metodista.Menu
             _operacoesService.ProcessarFuncoes(new BancoCommon(matricula, 0, string.Empty, 0, taxa, meses), TipoOperacao.AplicacaoRendimento);
         }
 
+        #endregion
     }
 }
 

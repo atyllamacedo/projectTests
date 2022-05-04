@@ -14,9 +14,9 @@ namespace Project.Metodista.Application.Service
     public class OperacoesService : IOperacoesService
     {
         private readonly IBaseRespository _baseRespository;
-        public OperacoesService()
+        public OperacoesService(IBaseRespository baseRespository)
         {
-            _baseRespository = new BaseRepository();
+            _baseRespository = baseRespository;
         }
         public MetodistaDTO ProcessarFuncoes(BancoCommon common, TipoOperacao tipoOperacao)
         {

@@ -47,3 +47,7 @@ C:\Users\atylla.cruz\source\repos\Project.Metodista\Project.Metodista\bin\Debug\
 C:\Users\atylla.cruz\source\repos\Project.Metodista\Project.Metodista\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\atylla.cruz\source\repos\Project.Metodista\Project.Metodista\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\atylla.cruz\source\repos\Project.Metodista\Project.Metodista\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\atylla.cruz\source\repos\Project.Metodista\Project.Metodista\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\atylla.cruz\source\repos\Project.Metodista\Project.Metodista\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\atylla.cruz\source\repos\Project.Metodista\Project.Metodista\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+C:\Users\atylla.cruz\source\repos\Project.Metodista\Project.Metodista\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml

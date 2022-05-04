@@ -104,6 +104,10 @@ namespace Project.Metodista.Operacoes.Repository
                     _dbContext.Commit();
                 }
             }
+            else
+            {
+                Console.WriteLine("Usuário não encontrado. Operação não efetuada");
+            }
 
             return user;
         }

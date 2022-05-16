@@ -2,12 +2,7 @@
 using Project.Metodista.Domain.Enum;
 using Project.Metodista.Domain.Repository;
 using Project.Metodista.Domain.Service;
-using Project.Metodista.Operacoes.Repository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project.Metodista.Application.Service
 {
@@ -22,7 +17,9 @@ namespace Project.Metodista.Application.Service
         {
             try
             {
-                Console.WriteLine($"Iniciando operação de {tipoOperacao}");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"Iniciando operação de {tipoOperacao}\n");
+                Console.ResetColor();
 
                 switch (tipoOperacao)
                 {
@@ -33,6 +30,8 @@ namespace Project.Metodista.Application.Service
                     case TipoOperacao.AplicacaoRendimento:
                         return _baseRespository.Rendimentos(common.MatriculaId, common.Taxa, common.Meses);
                     case TipoOperacao.Cadastro:
+                        return _baseRespository.Add(common);
+                    case TipoOperacao.ObterCliente:
                         return _baseRespository.Add(common);
                     default:
                         return null;
@@ -46,6 +45,4 @@ namespace Project.Metodista.Application.Service
             }
         }
     }
-
-
 }

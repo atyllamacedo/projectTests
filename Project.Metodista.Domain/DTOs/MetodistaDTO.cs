@@ -20,5 +20,8 @@ namespace Project.Metodista.Domain.DTOs
         [Column("Rendimento")]
         public double Rendimento { get; set; }
 
+        [Column("Aplicacao")]
+        public double Aplicacao { get; set; }
+
     }
 }

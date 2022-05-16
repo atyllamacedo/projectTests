@@ -1,9 +1,9 @@
 ﻿using Project.Metodista.Domain.DTOs;
 using Project.Metodista.Domain.Repository;
+using Project.Metodista.Operacoes.Helpers;
+using SQLite;
 using System;
 using System.IO;
-using SQLite;
-
 
 namespace Project.Metodista.Operacoes.Repository
 {
@@ -19,7 +19,7 @@ namespace Project.Metodista.Operacoes.Repository
                 _dbContext.CreateTable<MetodistaDTO>();
         }
 
-        public MetodistaDTO Add(BancoCommon entity)
+        public virtual MetodistaDTO Add(BancoCommon entity)
         {
             try
             {
@@ -35,10 +35,12 @@ namespace Project.Metodista.Operacoes.Repository
                     };
                     _dbContext.Insert(model);
                     _dbContext.Commit();
+
+                    ConsoleExtension.WriteLineSucesso("Operação realizada com sucesso.");
                 }
                 else
                 {
-                    //Console.WriteLine("Usuário já poosui cadastro");
+                    ConsoleExtension.WriteLineAlerta("Esse usuário já foi cadastrado.");
                 }
                 return usuario;
             }
@@ -49,7 +51,30 @@ namespace Project.Metodista.Operacoes.Repository
             }
         }
 
-        public MetodistaDTO Deposito(string matriculaId, double valorDeposito)
+        public virtual MetodistaDTO Aplicacao(string matriculaId, int tempo, double valor)
+        {
+            var user = ObterUsuarioPorId(matriculaId);
+
+            if (user != null)
+            {
+                double percentual = 20.3 / 100.0;
+                double valorFinal = valor - (percentual * valor);
+
+                user.Aplicacao = valorFinal;
+                _dbContext.Update(user);
+                _dbContext.Commit();
+
+                ConsoleExtension.WriteLineSucesso("Operação realizada com sucesso.");
+            }
+            else
+            {
+                ConsoleExtension.WriteLineError("Usuário não encontrado. Operação não efetuada");
+            }
+
+            return user;
+        }
+
+        public virtual MetodistaDTO Deposito(string matriculaId, double valorDeposito)
         {
             var user = ObterUsuarioPorId(matriculaId);
 
@@ -58,36 +83,51 @@ namespace Project.Metodista.Operacoes.Repository
                 user.ValorConta = user.ValorConta + valorDeposito;
                 _dbContext.Update(user);
                 _dbContext.Commit();
+
+                ConsoleExtension.WriteLineSucesso("Operação realizada com sucesso.");
+            }
+            else
+            {
+                ConsoleExtension.WriteLineError("Usuário não encontrado. Operação não efetuada");
             }
 
             return user;
         }
 
-        public MetodistaDTO ObterUsuarioPorId(string matriculaId)
+        public virtual MetodistaDTO ObterUsuarioPorId(string matriculaId)
         {
             var usuario = _dbContext.Table<MetodistaDTO>().FirstOrDefault(x => x.Matricula.Equals(matriculaId));
 
             return usuario;
         }
 
-        public MetodistaDTO Rendimentos(string matriculaId, double taxa, int meses)
+        public virtual MetodistaDTO Rendimentos(string matriculaId, double taxa, int meses)
         {
             var user = ObterUsuarioPorId(matriculaId);
 
             if (user != null)
             {
+                //Fórmula de Juros Compostos: Jc = P(1 + R / 100)T
+                //Onde P = Valor Inicial, T = Intervalo de Tempo, R = Taxa.
+
                 double montante = user.ValorConta * Math.Pow((1 + taxa), meses);
                 double juros = montante - user.ValorConta;
 
                 user.Rendimento = juros;
                 _dbContext.Update(user);
                 _dbContext.Commit();
+
+                ConsoleExtension.WriteLineSucesso("Operação realizada com sucesso.");
+            }
+            else
+            {
+                ConsoleExtension.WriteLineError("Usuário não encontrado. Operação não efetuada");
             }
 
             return user;
         }
 
-        public MetodistaDTO SaqueBanco(string matriculaId, double valorSaque)
+        public virtual MetodistaDTO SaqueBanco(string matriculaId, double valorSaque)
         {
             var user = ObterUsuarioPorId(matriculaId);
 
@@ -95,18 +135,20 @@ namespace Project.Metodista.Operacoes.Repository
             {
                 if (valorSaque > user.ValorConta)
                 {
-                    Console.WriteLine("Valor de saque não permitido. Valor informado é maior que o seu valor em conta");
+
+                    ConsoleExtension.WriteLineError("Valor de saque não permitido. Valor informado é maior que o seu valor em conta");
                 }
                 else
                 {
                     user.ValorConta = user.ValorConta - valorSaque;
                     _dbContext.Update(user);
                     _dbContext.Commit();
+                    ConsoleExtension.WriteLineSucesso("Operação realizada com sucesso.");
                 }
             }
             else
             {
-                Console.WriteLine("Usuário não encontrado. Operação não efetuada");
+                ConsoleExtension.WriteLineError("Usuário não encontrado. Operação não efetuada");
             }
 
             return user;

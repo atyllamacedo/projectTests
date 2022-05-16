@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Metodista.Applicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Metodista.Domain", "Project.Metodista.Domain\Project.Metodista.Domain.csproj", "{CD9E4C78-87EA-47E8-ABC0-A7D51A2150DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto.Unitario.Tests", "Projeto.Unitario.Tests\Projeto.Unitario.Tests.csproj", "{0BCE35C5-4053-410B-8442-6CA457A6112E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projeto.Unitario.Tests", "Projeto.Unitario.Tests\Projeto.Unitario.Tests.csproj", "{0BCE35C5-4053-410B-8442-6CA457A6112E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

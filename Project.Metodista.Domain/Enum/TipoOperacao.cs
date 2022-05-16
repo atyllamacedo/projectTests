@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Project.Metodista.Domain.Enum
+﻿namespace Project.Metodista.Domain.Enum
 {
     public enum TipoOperacao
     {
@@ -13,6 +7,8 @@ namespace Project.Metodista.Domain.Enum
         AplicacaoRendimento = 2,
         Sair = 3,
         Cadastro = 4,
-        ObterCliente = 5
+        ObterCliente = 5,
+        Aplicacao = 6
+
     }
 }
